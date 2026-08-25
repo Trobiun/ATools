@@ -54,32 +54,11 @@
     <ClCompile Include="main.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_MainFrame.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MainFrame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MainFrame.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="MainFrame.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Common.cpp">
       <Filter>Common</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_D3DWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_D3DWidget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Timeline.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Timeline.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\D3DEnum.cpp">
       <Filter>Common\DirectX</Filter>
@@ -120,12 +99,6 @@
     <ClCompile Include="ModelViewer.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ModelViewer.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ModelViewer.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\Sfx.cpp">
       <Filter>Common\Graphics</Filter>
     </ClCompile>
@@ -138,12 +111,6 @@
     <ClCompile Include="DialogNewPart.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogNewPart.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogNewPart.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="EditKey.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
@@ -152,12 +119,6 @@
     </ClCompile>
     <ClCompile Include="..\Common\AboutDialog.cpp">
       <Filter>Common\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\ShortcutsMng.cpp">
       <Filter>Common\Utils</Filter>
@@ -215,12 +176,6 @@
     <ClInclude Include="..\Common\Mesh.h">
       <Filter>Common\Graphics\Model</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_CreateNewPart.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_MainFrame.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\PtrArray.h">
       <Filter>Common\Utils</Filter>
     </ClInclude>
@@ -232,33 +187,33 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="MainFrame.qrc">
+    <QtRcc Include="MainFrame.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.ui">
+    </QtRcc>
+    <QtUic Include="MainFrame.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\D3DWidget.h">
+    </QtUic>
+    <QtMoc Include="..\Common\D3DWidget.h">
       <Filter>Common\DirectX</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\Timeline.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\Timeline.h">
       <Filter>Common\IO</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.h">
+    </QtMoc>
+    <QtMoc Include="MainFrame.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ModelViewer.h">
+    </QtMoc>
+    <QtMoc Include="ModelViewer.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CreateNewPart.ui">
+    </QtMoc>
+    <QtUic Include="CreateNewPart.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogNewPart.h">
+    </QtUic>
+    <QtMoc Include="DialogNewPart.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\AboutDialog.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\AboutDialog.h">
       <Filter>Common\Utils</Filter>
-    </CustomBuild>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SfxEditor.rc">
@@ -272,5 +227,6 @@
     <None Include="sfxeditor_de.ts">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

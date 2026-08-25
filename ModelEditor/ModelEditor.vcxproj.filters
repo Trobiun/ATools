@@ -53,15 +53,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MainFrame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MainFrame.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_MainFrame.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
@@ -85,12 +76,6 @@
     </ClCompile>
     <ClCompile Include="..\Common\D3DWidget.cpp">
       <Filter>Common\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_D3DWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_D3DWidget.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\TextureMng.cpp">
       <Filter>Common\Graphics</Filter>
@@ -116,20 +101,8 @@
     <ClCompile Include="..\Common\Timeline.cpp">
       <Filter>Common\IO</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Timeline.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Timeline.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ModelViewer.cpp">
       <Filter>MainFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ModelViewer.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ModelViewer.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="Importer.cpp">
       <Filter>Import</Filter>
@@ -137,35 +110,17 @@
     <ClCompile Include="DialogEditEffects.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_DialogEditEffects.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_DialogEditEffects.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="ChangeCW.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
     <ClCompile Include="SkinAuto.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_SkinAuto.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SkinAuto.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\TextFile.cpp">
       <Filter>Common\IO</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\SoundMng.cpp">
       <Filter>Common\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_SoundMng.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SoundMng.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="DAEExporter.cpp">
       <Filter>Export</Filter>
@@ -193,12 +148,6 @@
     </ClCompile>
     <ClCompile Include="..\Common\AboutDialog.cpp">
       <Filter>Common\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\ShortcutsMng.cpp">
       <Filter>Common\Utils</Filter>
@@ -250,15 +199,6 @@
     <ClInclude Include="Importer.h">
       <Filter>Import</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_DialogEditEffects.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_MainFrame.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_SkinAuto.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\TextFile.h">
       <Filter>Common\IO</Filter>
     </ClInclude>
@@ -279,42 +219,42 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="MainFrame.qrc">
+    <QtRcc Include="MainFrame.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.ui">
+    </QtRcc>
+    <QtUic Include="MainFrame.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.h">
+    </QtUic>
+    <QtMoc Include="MainFrame.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\D3DWidget.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\D3DWidget.h">
       <Filter>Common\DirectX</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\Timeline.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\Timeline.h">
       <Filter>Common\IO</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ModelViewer.h">
+    </QtMoc>
+    <QtMoc Include="ModelViewer.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogEditEffects.h">
+    </QtMoc>
+    <QtMoc Include="DialogEditEffects.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="DialogEditEffects.ui">
+    </QtMoc>
+    <QtUic Include="DialogEditEffects.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SkinAuto.ui">
+    </QtUic>
+    <QtUic Include="SkinAuto.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="SkinAuto.h">
+    </QtUic>
+    <QtMoc Include="SkinAuto.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\SoundMng.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\SoundMng.h">
       <Filter>Common\IO</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\AboutDialog.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\AboutDialog.h">
       <Filter>Common\Utils</Filter>
-    </CustomBuild>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ModelEditor.rc">
@@ -331,6 +271,7 @@
     <None Include="modeleditor_de.ts">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="ModelEditor.ico">

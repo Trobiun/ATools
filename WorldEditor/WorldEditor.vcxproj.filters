@@ -60,12 +60,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MainFrame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MainFrame.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
@@ -74,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>MainFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_MainFrame.cpp">
-      <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Common.cpp">
       <Filter>Common</Filter>
@@ -89,12 +80,6 @@
     </ClCompile>
     <ClCompile Include="..\Common\D3DWidget.cpp">
       <Filter>Common\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_D3DWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_D3DWidget.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Font.cpp">
       <Filter>Common\Graphics</Filter>
@@ -144,12 +129,6 @@
     <ClCompile Include="..\Common\World.cpp">
       <Filter>Common\World</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_WorldEditor.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_WorldEditor.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\WorldFile.cpp">
       <Filter>Common\World</Filter>
     </ClCompile>
@@ -168,38 +147,14 @@
     <ClCompile Include="..\Common\Object.cpp">
       <Filter>Common\World</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Navigator.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Navigator.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_NewWorld.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_NewWorld.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\WorldIntersects.cpp">
       <Filter>Common\World</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Collision.cpp">
       <Filter>Common\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_WorldProperties.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_WorldProperties.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="TerrainEdition.cpp">
       <Filter>Edition</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ContinentEdit.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ContinentEdit.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Mover.cpp">
       <Filter>Common\World</Filter>
@@ -215,18 +170,6 @@
     </ClCompile>
     <ClCompile Include="ObjectEdition.cpp">
       <Filter>Edition</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ObjectProperties.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ObjectProperties.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_GameElementsTree.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_GameElementsTree.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GameElementsTree.cpp">
       <Filter>MainFrame\UI</Filter>
@@ -275,12 +218,6 @@
     </ClCompile>
     <ClCompile Include="..\Common\AboutDialog.cpp">
       <Filter>Common\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\ShortcutsMng.cpp">
       <Filter>Common\Utils</Filter>
@@ -380,24 +317,6 @@
     <ClInclude Include="..\Common\Ctrl.h">
       <Filter>Common\World</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ContinentEdit.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_MainFrame.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_NewWorld.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ObjectProperites.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_Random.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_WorldProperties.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\Path.h">
       <Filter>Common\World</Filter>
     </ClInclude>
@@ -415,57 +334,57 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="MainFrame.h">
+    <QtMoc Include="MainFrame.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.ui">
+    </QtMoc>
+    <QtUic Include="MainFrame.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.qrc">
+    </QtUic>
+    <QtRcc Include="MainFrame.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\D3DWidget.h">
+    </QtRcc>
+    <QtMoc Include="..\Common\D3DWidget.h">
       <Filter>Common\DirectX</Filter>
-    </CustomBuild>
-    <CustomBuild Include="NewWorld.ui">
+    </QtMoc>
+    <QtUic Include="NewWorld.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="WorldProperties.ui">
+    </QtUic>
+    <QtUic Include="WorldProperties.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ContinentEdit.ui">
+    </QtUic>
+    <QtUic Include="ContinentEdit.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Random.ui">
+    </QtUic>
+    <QtUic Include="Random.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ObjectProperites.ui">
+    </QtUic>
+    <QtUic Include="ObjectProperites.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="GameElementsTree.h">
+    </QtUic>
+    <QtMoc Include="GameElementsTree.h">
       <Filter>MainFrame\UI</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ContinentEdit.h">
+    </QtMoc>
+    <QtMoc Include="ContinentEdit.h">
       <Filter>Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="NewWorld.h">
+    </QtMoc>
+    <QtMoc Include="NewWorld.h">
       <Filter>Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="WorldProperties.h">
+    </QtMoc>
+    <QtMoc Include="WorldProperties.h">
       <Filter>Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ObjectProperties.h">
+    </QtMoc>
+    <QtMoc Include="ObjectProperties.h">
       <Filter>Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Navigator.h">
+    </QtMoc>
+    <QtMoc Include="Navigator.h">
       <Filter>Dialogs</Filter>
-    </CustomBuild>
-    <CustomBuild Include="WorldEditor.h">
+    </QtMoc>
+    <QtMoc Include="WorldEditor.h">
       <Filter>Edition</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\AboutDialog.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\AboutDialog.h">
       <Filter>Common\Utils</Filter>
-    </CustomBuild>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WorldEditor.rc">
@@ -482,5 +401,6 @@
     <None Include="worldeditor_de.ts">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

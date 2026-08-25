@@ -39,15 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MainFrame.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MainFrame.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_MainFrame.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
@@ -66,29 +57,11 @@
     <ClCompile Include="ClientExtractor.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ClientExtractor.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ClientExtractor.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="FileModel.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_FileModel.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_FileModel.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="..\Common\AboutDialog.cpp">
       <Filter>Common\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_AboutDialog.cpp">
-      <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\ShortcutsMng.cpp">
       <Filter>Common\Utils</Filter>
@@ -100,9 +73,6 @@
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>MainFrame</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_MainFrame.h">
-      <Filter>MainFrame\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\Common\Common.h">
       <Filter>Common</Filter>
@@ -116,9 +86,6 @@
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_ClientExtractor.h">
-      <Filter>MainFrame\UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common\ShortcutsMng.h">
       <Filter>Common\Utils</Filter>
     </ClInclude>
@@ -127,27 +94,27 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="MainFrame.h">
+    <QtMoc Include="MainFrame.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.qrc">
+    </QtMoc>
+    <QtRcc Include="MainFrame.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainFrame.ui">
+    </QtRcc>
+    <QtUic Include="MainFrame.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ClientExtractor.ui">
+    </QtUic>
+    <QtUic Include="ClientExtractor.ui">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ClientExtractor.h">
+    </QtUic>
+    <QtMoc Include="ClientExtractor.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="FileModel.h">
+    </QtMoc>
+    <QtMoc Include="FileModel.h">
       <Filter>MainFrame</Filter>
-    </CustomBuild>
-    <CustomBuild Include="..\Common\AboutDialog.h">
+    </QtMoc>
+    <QtMoc Include="..\Common\AboutDialog.h">
       <Filter>Common\Utils</Filter>
-    </CustomBuild>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ResEditor.rc">
@@ -161,5 +128,6 @@
     <None Include="reseditor_de.ts">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
