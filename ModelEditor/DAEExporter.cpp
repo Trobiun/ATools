@@ -609,6 +609,146 @@ void CDAEExporter::_writeAnimations()
 		channel.setAttribute("target", objID % "/transform");
 		animation.appendChild(channel);
 	}
+
+	// AI generated
+	// Bones with no dedicated animation track only get a static <matrix> in the
+	// node hierarchy, with no <channel> targeting them at all. Some importers
+	// mis-evaluate such "silent" joints once the armature action is baked and
+	// played back (rest pose looks fine, but the joint drifts/freezes during
+	// playback), which compounds down the chain and shows up worst on terminal
+	// bones (fingers, tails, ...) that often don't have their own track. Emit a
+	// constant animation (same local matrix repeated every frame) for them too,
+	// so every joint is driven the same way.
+	for (auto it = m_boneAnimTMs.begin(); it != m_boneAnimTMs.end(); it++)
+	{
+		Bone* bone = it.key();
+		const string boneID = string(bone->name).toLower().replace('.', '_').replace('-', '_').replace(' ', '_');
+		const string aniID = boneID % "-transform";
+
+		QDomElement animation = m_doc.createElement("animation");
+		animation.setAttribute("id", aniID);
+		animations.appendChild(animation);
+
+		{
+			const QString srcID = aniID % "-input";
+			QDomElement source = m_doc.createElement("source");
+			source.setAttribute("id", srcID);
+			animation.appendChild(source);
+
+			QDomElement float_array = m_doc.createElement("float_array");
+			float_array.setAttribute("id", srcID % "-array");
+			float_array.setAttribute("count", QString::number(m_frameCount));
+			QString fList;
+			for (int i = 0; i < m_frameCount; i++)
+			{
+				fList.append(QString::number((1.0f / 30.0f) * (float)i));
+				fList.append(' ');
+			}
+			float_array.appendChild(m_doc.createTextNode(fList));
+			source.appendChild(float_array);
+
+			QDomElement technique_common = m_doc.createElement("technique_common");
+			source.appendChild(technique_common);
+
+			QDomElement accessor = m_doc.createElement("accessor");
+			accessor.setAttribute("source", '#' % srcID % "-array");
+			accessor.setAttribute("count", QString::number(m_frameCount));
+			accessor.setAttribute("stride", "1");
+			technique_common.appendChild(accessor);
+
+			QDomElement param = m_doc.createElement("param");
+			param.setAttribute("name", "TIME");
+			param.setAttribute("type", "float");
+			accessor.appendChild(param);
+		}
+		{
+			const QString srcID = aniID % "-output";
+			QDomElement source = m_doc.createElement("source");
+			source.setAttribute("id", srcID);
+			animation.appendChild(source);
+
+			QDomElement float_array = m_doc.createElement("float_array");
+			float_array.setAttribute("id", srcID % "-array");
+			float_array.setAttribute("count", QString::number(m_frameCount * 16));
+			QString fList;
+			const string matStr = _matToString(it.value());
+			for (int i = 0; i < m_frameCount; i++)
+				fList.append(matStr);
+			float_array.appendChild(m_doc.createTextNode(fList));
+			source.appendChild(float_array);
+
+			QDomElement technique_common = m_doc.createElement("technique_common");
+			source.appendChild(technique_common);
+
+			QDomElement accessor = m_doc.createElement("accessor");
+			accessor.setAttribute("source", '#' % srcID % "-array");
+			accessor.setAttribute("count", QString::number(m_frameCount));
+			accessor.setAttribute("stride", "16");
+			technique_common.appendChild(accessor);
+
+			QDomElement param = m_doc.createElement("param");
+			param.setAttribute("name", "TRANSFORM");
+			param.setAttribute("type", "float4x4");
+			accessor.appendChild(param);
+		}
+		{
+			const QString srcID = aniID % "-interpolation";
+			QDomElement source = m_doc.createElement("source");
+			source.setAttribute("id", srcID);
+			animation.appendChild(source);
+
+			QDomElement Name_array = m_doc.createElement("Name_array");
+			Name_array.setAttribute("id", srcID % "-array");
+			Name_array.setAttribute("count", QString::number(m_frameCount));
+			QString nameList;
+			for (int i = 0; i < m_frameCount; i++)
+				nameList.append("LINEAR ");
+			Name_array.appendChild(m_doc.createTextNode(nameList));
+			source.appendChild(Name_array);
+
+			QDomElement technique_common = m_doc.createElement("technique_common");
+			source.appendChild(technique_common);
+
+			QDomElement accessor = m_doc.createElement("accessor");
+			accessor.setAttribute("source", '#' % srcID % "-array");
+			accessor.setAttribute("count", QString::number(m_frameCount));
+			accessor.setAttribute("stride", "1");
+			technique_common.appendChild(accessor);
+
+			QDomElement param = m_doc.createElement("param");
+			param.setAttribute("name", "INTERPOLATION");
+			param.setAttribute("type", "name");
+			accessor.appendChild(param);
+		}
+
+		QDomElement sampler = m_doc.createElement("sampler");
+		sampler.setAttribute("id", aniID % "-sampler");
+		animation.appendChild(sampler);
+
+		{
+			QDomElement input = m_doc.createElement("input");
+			input.setAttribute("semantic", "INPUT");
+			input.setAttribute("source", '#' % aniID % "-input");
+			sampler.appendChild(input);
+		}
+		{
+			QDomElement input = m_doc.createElement("input");
+			input.setAttribute("semantic", "OUTPUT");
+			input.setAttribute("source", '#' % aniID % "-output");
+			sampler.appendChild(input);
+		}
+		{
+			QDomElement input = m_doc.createElement("input");
+			input.setAttribute("semantic", "INTERPOLATION");
+			input.setAttribute("source", '#' % aniID % "-interpolation");
+			sampler.appendChild(input);
+		}
+
+		QDomElement channel = m_doc.createElement("channel");
+		channel.setAttribute("source", '#' % aniID % "-sampler");
+		channel.setAttribute("target", boneID % "/transform");
+		animation.appendChild(channel);
+	}
 }
 
 void CDAEExporter::_writeControllers()
@@ -1019,7 +1159,7 @@ string CDAEExporter::_matToString(const D3DXMATRIX& mat)
 		mat._21, mat._22, -mat._23, mat._24,
 		-mat._31, -mat._32, mat._33, -mat._34,
 		mat._41, mat._42, -mat._43, mat._44
-		);
+	);
 
 	string s;
 	for (int i = 0; i < 4; i++)
