@@ -12,7 +12,7 @@
 class COBJExporter : public CExporter
 {
 public:
-	COBJExporter(CAnimatedMesh* mesh);
+	COBJExporter(CAnimatedMesh* mesh, bool exportAllLODs);
 
 	virtual bool Export(const string& filename);
 

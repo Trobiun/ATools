@@ -9,8 +9,8 @@
 #include <Object3D.h>
 #include <Motion.h>
 
-COBJExporter::COBJExporter(CAnimatedMesh* mesh)
-	: CExporter(mesh)
+COBJExporter::COBJExporter(CAnimatedMesh* mesh, bool exportAllLODs)
+	: CExporter(mesh, exportAllLODs)
 {
 }
 

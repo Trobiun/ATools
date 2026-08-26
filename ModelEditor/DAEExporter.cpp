@@ -9,8 +9,8 @@
 #include <Object3D.h>
 #include <Motion.h>
 
-CDAEExporter::CDAEExporter(CAnimatedMesh* mesh)
-	: CExporter(mesh)
+CDAEExporter::CDAEExporter(CAnimatedMesh* mesh, bool exportAllLODs)
+	: CExporter(mesh, exportAllLODs)
 {
 }
 

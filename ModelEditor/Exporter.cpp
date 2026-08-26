@@ -10,7 +10,7 @@
 #include <Object3D.h>
 #include <Motion.h>
 
-CExporter::CExporter(CAnimatedMesh* mesh)
+CExporter::CExporter(CAnimatedMesh* mesh, bool exportAllLODs)
 {
 	CObject3D* obj3D = null;
 	for (int i = 0; i < MAX_ANIMATED_ELEMENTS; i++)
@@ -87,7 +87,7 @@ CExporter::CExporter(CAnimatedMesh* mesh)
 	{
 		int gmID = 0;
 		GMObject* obj = null;
-		for (int i = 0; i < (obj3D->m_LOD ? MAX_GROUP : 1); i++)
+		for (int i = 0; i < (obj3D->m_LOD && exportAllLODs ? MAX_GROUP : 1); i++)
 		{
 			gmID = 0;
 			for (int j = 0; j < obj3D->m_groups[i].objectCount; j++)
@@ -140,7 +140,7 @@ CExporter::CExporter(CAnimatedMesh* mesh)
 			{
 				curObj3D = mesh->m_elements[objIndex].obj;
 
-				for (int i = 0; i < (curObj3D->m_LOD ? MAX_GROUP : 1); i++)
+				for (int i = 0; i < (curObj3D->m_LOD && exportAllLODs ? MAX_GROUP : 1); i++)
 				{
 					for (int j = 0; j < curObj3D->m_groups[i].objectCount; j++)
 					{

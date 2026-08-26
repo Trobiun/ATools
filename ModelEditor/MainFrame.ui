@@ -109,8 +109,16 @@
      <string>Fenêtres</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuExport">
+    <property name="title">
+     <string>Export</string>
+    </property>
+    <addaction name="actionExporter_tous_les_LODs"/>
+    <addaction name="actionExporter_toutes_les_animations"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menu_dition"/>
+   <addaction name="menuExport"/>
    <addaction name="menuAffichage"/>
    <addaction name="menuFen_tres"/>
    <addaction name="menu"/>
@@ -582,6 +590,25 @@
    </property>
    <property name="text">
     <string>Collision auto</string>
+   </property>
+  </action>
+  <action name="actionExporter_tous_les_LODs">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Exporter tous les LODs</string>
+   </property>
+  </action>
+  <action name="actionExporter_toutes_les_animations">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Exporter toutes les animations</string>
    </property>
   </action>
  </widget>

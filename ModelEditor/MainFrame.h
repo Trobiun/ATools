@@ -42,6 +42,8 @@ public slots:
 	void MotionAttributeModified(int row, int frame, bool removed);
 	void ChangeLOD(QAction* action);
 	void SaveFile();
+	void ChangeExportAllLODs(bool exportAllLODs);
+	void ChangeExportAllAnimations(bool exporrtAllAnimations);
 	void OpenFile();
 	void EditEffects();
 	void ImportGuide();
@@ -80,6 +82,8 @@ private:
 	QTranslator m_translator;
 	int m_language;
 	QActionGroup* m_languageActionGroup;
+	bool m_exportAllLODs;
+	bool m_exportAllAnimations;
 
 	void _saveFile(const string& filename);
 

@@ -17,7 +17,7 @@ struct MaterialBlock;
 class CExporter
 {
 public:
-	CExporter(CAnimatedMesh* mesh);
+	CExporter(CAnimatedMesh* mesh, bool exportAllLODs);
 
 	virtual bool Export(const string& filename) = 0;
 

@@ -12,7 +12,7 @@
 class CDAEExporter : public CExporter
 {
 public:
-	CDAEExporter(CAnimatedMesh* mesh);
+	CDAEExporter(CAnimatedMesh* mesh, bool exportAllLODs);
 
 	virtual bool Export(const string& filename);
 

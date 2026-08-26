@@ -22,7 +22,7 @@
 #include <AboutDialog.h>
 #include <ShortcutsMng.h>
 
-CMainFrame::CMainFrame(QWidget *parent)
+CMainFrame::CMainFrame(QWidget* parent)
 	: QMainWindow(parent),
 	m_mesh(null),
 	m_motionList(null),
@@ -33,7 +33,9 @@ CMainFrame::CMainFrame(QWidget *parent)
 	m_fillModeActionGroup(null),
 	m_importScaleFactor(1.0f),
 	m_referenceModelID(SEX_SEXLESS),
-	m_status(null)
+	m_status(null),
+	m_exportAllLODs(false),
+	m_exportAllAnimations(true)
 {
 }
 
@@ -123,6 +125,8 @@ void CMainFrame::_connectWidgets()
 	connect(ui.actionStop, SIGNAL(triggered()), this, SLOT(Stop()));
 	connect(ui.actionFermer, SIGNAL(triggered()), this, SLOT(CloseFile()));
 	connect(ui.actionEnregistrer, SIGNAL(triggered()), this, SLOT(SaveFile()));
+	connect(ui.actionExporter_tous_les_LODs, SIGNAL(triggered(bool)), this, SLOT(ChangeExportAllLODs(bool)));
+	connect(ui.actionExporter_toutes_les_animations, SIGNAL(triggered(bool)), this, SLOT(ChangeExportAllAnimations(bool)));
 	connect(ui.actionOuvrir, SIGNAL(triggered()), this, SLOT(OpenFile()));
 	connect(ui.action_diter_les_effets, SIGNAL(triggered()), this, SLOT(EditEffects()));
 	connect(ui.actionGuide_d_import, SIGNAL(triggered()), this, SLOT(ImportGuide()));
@@ -289,8 +293,20 @@ void CMainFrame::_loadSettings()
 				m_modelViewer->SetReferenceModelID(m_referenceModelID);
 		}
 
+		if (settings.contains("ExportAllLODs"))
+		{
+			m_exportAllLODs = settings.value("ExportAllLODs").toBool();
+			ui.actionExporter_tous_les_LODs->setChecked(m_exportAllLODs);
+		}
+		if (settings.contains("ExportAllAnimations"))
+		{
+			m_exportAllAnimations = settings.value("ExportAllAnimations").toBool();
+			ui.actionExporter_toutes_les_animations->setChecked(m_exportAllAnimations);
+		}
+
 		if (m_modelViewer && !m_modelViewer->IsAutoRefresh())
 			m_modelViewer->RenderEnvironment();
+
 	}
 }
 
@@ -341,6 +357,8 @@ void CMainFrame::closeEvent(QCloseEvent* event)
 		settings.setValue("FillMode", (uint)g_global3D.fillMode);
 		settings.setValue("ImportScaleFactor", m_importScaleFactor);
 		settings.setValue("ReferenceModel", m_referenceModelID);
+		settings.setValue("ExportAllLODs", m_exportAllLODs);
+		settings.setValue("ExportAllAnimations", m_exportAllAnimations);
 	}
 
 	QMainWindow::closeEvent(event);
@@ -518,11 +536,11 @@ void CMainFrame::_saveFile(const string& filename)
 	bool result = false;
 	if (GetExtension(filename) == "dae")
 	{
-		result = CDAEExporter(m_mesh).Export(filename);
+		result = CDAEExporter(m_mesh, m_exportAllLODs).Export(filename);
 	}
 	else if (GetExtension(filename) == "obj")
 	{
-		result = COBJExporter(m_mesh).Export(filename);
+		result = COBJExporter(m_mesh, m_exportAllLODs).Export(filename);
 	}
 	else if (GetExtension(filename) == "ani" && m_mesh->m_motion)
 	{
@@ -565,10 +583,10 @@ void CMainFrame::OpenFile()
 	string dir = ModelMng->GetModelPath();
 	if (!m_filename.isEmpty())
 	{
-		 string tempFilename = m_filename;
-		 if (GetExtension(tempFilename) == "ani")
-			 tempFilename.replace(".ani", ".dae");
-		 dir += tempFilename;
+		string tempFilename = m_filename;
+		if (GetExtension(tempFilename) == "ani")
+			tempFilename.replace(".ani", ".dae");
+		dir += tempFilename;
 	}
 
 	const QString filename = QFileDialog::getOpenFileName(this, tr("Charger un model"), dir, tr("Fichier 3D") % " (" % m_supportedImportFiles % ")");
@@ -689,6 +707,16 @@ void CMainFrame::ChangeLOD(QAction* action)
 		m_modelViewer->SetLOD(2);
 }
 
+void CMainFrame::ChangeExportAllLODs(bool exportAllLODs)
+{
+	m_exportAllLODs = exportAllLODs;
+}
+
+void CMainFrame::ChangeExportAllAnimations(bool exportAllAnimations)
+{
+	m_exportAllAnimations = exportAllAnimations;
+}
+
 void CMainFrame::MotionAttributeModified(int row, int frame, bool removed)
 {
 	const int frameCount = m_mesh->GetFrameCount();
@@ -749,7 +777,7 @@ void CMainFrame::MotionAttributeModified(int row, int frame, bool removed)
 	}
 }
 
-void CMainFrame::PlayMotion(const QModelIndex & index)
+void CMainFrame::PlayMotion(const QModelIndex& index)
 {
 	m_soundMng->Stop();
 	m_modelViewer->ChangeMotion();
