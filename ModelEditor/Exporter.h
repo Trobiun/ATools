@@ -34,10 +34,19 @@ protected:
 	QMap<GMObject*, int> m_objectLODs;
 	QMap<Bone*, D3DXMATRIX> m_boneAnimTMs;
 
+	// Kept so a subclass can re-scan the animation data after the caller
+	// swaps mesh->m_motion for a different preloaded .ani (see PlayMotion),
+	// without rebuilding the geometry/materials/skeleton maps above.
+	CAnimatedMesh* m_mesh;
+	CObject3D* m_obj3D;
+
+	void _gatherAnimations();
+
 	string _getMaterialID(Material* mat);
 	MaterialBlock* _getMaterialBlock(Material* mat);
 
 	D3DXMATRIX _getRotationMatrix(const D3DXQUATERNION& quat) const;
+
 };
 
 #endif // EXPORTER_H

@@ -191,6 +191,7 @@
     <ClCompile Include="DAEExporter.cpp" />
     <ClCompile Include="DialogEditEffects.cpp" />
     <ClCompile Include="Exporter.cpp" />
+    <ClCompile Include="GLTFExporter.cpp" />
     <ClCompile Include="ImportAnim.cpp" />
     <ClCompile Include="Importer.cpp" />
     <ClCompile Include="ImportGeometry.cpp" />
@@ -251,6 +252,7 @@
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdafx.h;../../%(Filename)%(Extension)</ForceInclude>
       <ForceInclude Condition="'$(Configuration)|$(Platform)'=='Release|x64'">stdafx.h;../../%(Filename)%(Extension)</ForceInclude>
     </QtMoc>
+    <ClInclude Include="GLTFExporter.h" />
     <ClInclude Include="Importer.h" />
     <ClInclude Include="ImportUtils.h" />
     <ClInclude Include="OBJExporter.h" />

@@ -16,6 +16,7 @@
 #include "Importer.h"
 #include "DAEExporter.h"
 #include "OBJExporter.h"
+#include "GLTFExporter.h"
 #include "DialogEditEffects.h"
 #include <SoundMng.h>
 #include <TextFile.h>
@@ -534,8 +535,38 @@ void CMainFrame::_saveFile(const string& filename)
 		return;
 
 	bool result = false;
-	if (GetExtension(filename) == "dae")
+	if (GetExtension(filename) == "gltf")
 	{
+		string prefix;
+		if (m_meshSex == SEX_MALE)
+			prefix = "mvr_male";
+		else if (m_meshSex == SEX_FEMALE)
+			prefix = "mvr_female";
+		else
+			prefix = QFileInfo(m_filename).baseName();
+
+		CGLTFExporter exporter = CGLTFExporter(m_mesh, m_exportAllLODs);
+		if (m_exportAllAnimations)
+		{
+			QMap<QString, CMotion*> motionMap;
+			QStringList motionNamesList = m_motionList->stringList();
+
+			for (auto it = motionNamesList.constBegin(); it != motionNamesList.constEnd(); it++)
+			{
+				string motionName = prefix % '_' % *it % ".ani";
+				motionMap.insert(motionName, ModelMng->GetMotion(motionName));
+			}
+			result = exporter.ExportAllMotions(motionMap, prefix, filename);
+		}
+		else
+		{
+			result = exporter.Export(filename);
+		}
+	}
+	else if (GetExtension(filename) == "dae")
+	{
+		// COLLADA DAE format does not support well multiple animations clips
+		// at least when reimported in Blender
 		result = CDAEExporter(m_mesh, m_exportAllLODs).Export(filename);
 	}
 	else if (GetExtension(filename) == "obj")
@@ -603,14 +634,14 @@ void CMainFrame::SaveFile()
 	string filename;
 
 	if (m_mesh->m_motion)
-		filename = QFileDialog::getSaveFileName(this, tr("Enregistrer l'animation/le model"), ModelMng->GetModelPath() % m_motionName, tr("Fichier d'animation") % " (*.ani);; " % tr("Fichier 3D") % " (*.o3d *.dae *.obj)");
+		filename = QFileDialog::getSaveFileName(this, tr("Enregistrer l'animation/le model"), ModelMng->GetModelPath() % m_motionName, tr("Fichier d'animation") % " (*.ani);; " % tr("Fichier 3D") % " (*.gltf *.o3d *.dae *.obj)");
 	else
 	{
 		string tempFilename = m_filename;
 		if (GetExtension(tempFilename) == "ani")
 			tempFilename.replace(".ani", ".dae");
 
-		filename = QFileDialog::getSaveFileName(this, tr("Enregistrer le model"), ModelMng->GetModelPath() % tempFilename, tr("Fichier 3D") % " (*.o3d *.dae *.obj)");
+		filename = QFileDialog::getSaveFileName(this, tr("Enregistrer le model"), ModelMng->GetModelPath() % tempFilename, tr("Fichier 3D") % " (*.gltf *.o3d *.dae *.obj)");
 	}
 
 	if (!filename.isEmpty())

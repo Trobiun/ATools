@@ -25,19 +25,22 @@ CExporter::CExporter(CAnimatedMesh* mesh, bool exportAllLODs)
 	if (!obj3D)
 		return;
 
+	m_mesh = mesh;
+	m_obj3D = obj3D;
+
 	CMotion* motion = null;
 	int boneCount = 0;
 	Bone* bones = null;
 
-	if (mesh->m_motion)
-		motion = mesh->m_motion;
-	if (obj3D->m_motion)
-		motion = obj3D->m_motion;
+	if (m_mesh->m_motion)
+		motion = m_mesh->m_motion;
+	if (m_obj3D->m_motion)
+		motion = m_obj3D->m_motion;
 
-	if (mesh->m_skeleton)
+	if (m_mesh->m_skeleton)
 	{
-		boneCount = mesh->m_skeleton->m_boneCount;
-		bones = mesh->m_skeleton->m_bones;
+		boneCount = m_mesh->m_skeleton->m_boneCount;
+		bones = m_mesh->m_skeleton->m_bones;
 	}
 	else if (motion)
 	{
@@ -46,40 +49,40 @@ CExporter::CExporter(CAnimatedMesh* mesh, bool exportAllLODs)
 	}
 
 	int matID = 0;
-	if (obj3D->m_collObj.type != GMT_ERROR)
+	if (m_obj3D->m_collObj.type != GMT_ERROR)
 	{
-		if (obj3D->m_collObj.material)
+		if (m_obj3D->m_collObj.material)
 		{
-			for (int i = 0; i < obj3D->m_collObj.materialCount; i++)
+			for (int i = 0; i < m_obj3D->m_collObj.materialCount; i++)
 			{
-				m_materials["Material" % string::number(matID) % "CollObj"] = &obj3D->m_collObj.materials[i];
+				m_materials["Material" % string::number(matID) % "CollObj"] = &m_obj3D->m_collObj.materials[i];
 				matID++;
 			}
 		}
 
-		if (obj3D->m_collObj.materialBlockCount == 0
-			&& obj3D->m_collObj.indexCount > 0)
+		if (m_obj3D->m_collObj.materialBlockCount == 0
+			&& m_obj3D->m_collObj.indexCount > 0)
 		{
-			obj3D->m_collObj.materialBlockCount = 1;
-			obj3D->m_collObj.materialBlocks = new MaterialBlock[1];
-			memset(obj3D->m_collObj.materialBlocks, 0, sizeof(MaterialBlock));
+			m_obj3D->m_collObj.materialBlockCount = 1;
+			m_obj3D->m_collObj.materialBlocks = new MaterialBlock[1];
+			memset(m_obj3D->m_collObj.materialBlocks, 0, sizeof(MaterialBlock));
 
-			if (obj3D->m_collObj.material)
-				obj3D->m_collObj.materialBlocks[0].materialID = 0;
+			if (m_obj3D->m_collObj.material)
+				m_obj3D->m_collObj.materialBlocks[0].materialID = 0;
 			else
-				obj3D->m_collObj.materialBlocks[0].materialID = -1;
+				m_obj3D->m_collObj.materialBlocks[0].materialID = -1;
 
-			obj3D->m_collObj.materialBlocks[0].primitiveCount = obj3D->m_collObj.indexCount / 3;
+			m_obj3D->m_collObj.materialBlocks[0].primitiveCount = m_obj3D->m_collObj.indexCount / 3;
 		}
 
-		m_objects["CollisionObject-coll"] = &obj3D->m_collObj;
-		m_objectLODs[&obj3D->m_collObj] = -1;
+		m_objects["CollisionObject-coll"] = &m_obj3D->m_collObj;
+		m_objectLODs[&m_obj3D->m_collObj] = -1;
 	}
 
 	int obj3DCount = 0;
 	for (int i = 0; i < MAX_ANIMATED_ELEMENTS; i++)
 	{
-		if (mesh->m_elements[i].obj)
+		if (m_mesh->m_elements[i].obj)
 			obj3DCount++;
 	}
 
@@ -87,12 +90,12 @@ CExporter::CExporter(CAnimatedMesh* mesh, bool exportAllLODs)
 	{
 		int gmID = 0;
 		GMObject* obj = null;
-		for (int i = 0; i < (obj3D->m_LOD && exportAllLODs ? MAX_GROUP : 1); i++)
+		for (int i = 0; i < (m_obj3D->m_LOD && exportAllLODs ? MAX_GROUP : 1); i++)
 		{
 			gmID = 0;
-			for (int j = 0; j < obj3D->m_groups[i].objectCount; j++)
+			for (int j = 0; j < m_obj3D->m_groups[i].objectCount; j++)
 			{
-				obj = &obj3D->m_groups[i].objects[j];
+				obj = &m_obj3D->m_groups[i].objects[j];
 
 				string objName = "";
 				if (i > 0)
@@ -136,9 +139,9 @@ CExporter::CExporter(CAnimatedMesh* mesh, bool exportAllLODs)
 
 		for (int objIndex = 0; objIndex < MAX_ANIMATED_ELEMENTS; objIndex++)
 		{
-			if (mesh->m_elements[objIndex].obj)
+			if (m_mesh->m_elements[objIndex].obj)
 			{
-				curObj3D = mesh->m_elements[objIndex].obj;
+				curObj3D = m_mesh->m_elements[objIndex].obj;
 
 				for (int i = 0; i < (curObj3D->m_LOD && exportAllLODs ? MAX_GROUP : 1); i++)
 				{
@@ -195,32 +198,33 @@ CExporter::CExporter(CAnimatedMesh* mesh, bool exportAllLODs)
 		}
 	}
 
-	m_frameCount = 0;
-	if (obj3D->m_frameCount > 0)
-		m_frameCount = obj3D->m_frameCount;
-	else if (motion && motion->m_frameCount > 0)
-		m_frameCount = motion->m_frameCount;
+	_gatherAnimations();
+	//m_frameCount = 0;
+	//if (obj3D->m_frameCount > 0)
+	//	m_frameCount = obj3D->m_frameCount;
+	//else if (motion && motion->m_frameCount > 0)
+	//	m_frameCount = motion->m_frameCount;
 
-	if (obj3D->m_frameCount > 0)
-	{
-		for (auto it = m_objects.begin(); it != m_objects.end(); it++)
-		{
-			if (it.value()->frames)
-				m_animations[it.key() % "-transform"] = it.value()->frames;
-		}
-	}
+	//if (obj3D->m_frameCount > 0)
+	//{
+	//	for (auto it = m_objects.begin(); it != m_objects.end(); it++)
+	//	{
+	//		if (it.value()->frames)
+	//			m_animations[it.key() % "-transform"] = it.value()->frames;
+	//	}
+	//}
 
-	if (motion)
-	{
-		for (int i = 0; i < boneCount; i++)
-		{
-			const string boneID = string(bones[i].name).toLower().replace('.', '_').replace('-', '_').replace(' ', '_');
-			if (motion->m_frames[i].frames)
-				m_animations[boneID % "-transform"] = motion->m_frames[i].frames;
-			else
-				m_boneAnimTMs[m_bones[i]] = motion->m_frames[i].TM;
-		}
-	}
+	//if (motion)
+	//{
+	//	for (int i = 0; i < boneCount; i++)
+	//	{
+	//		const string boneID = string(bones[i].name).toLower().replace('.', '_').replace('-', '_').replace(' ', '_');
+	//		if (motion->m_frames[i].frames)
+	//			m_animations[boneID % "-transform"] = motion->m_frames[i].frames;
+	//		else
+	//			m_boneAnimTMs[m_bones[i]] = motion->m_frames[i].TM;
+	//	}
+	//}
 }
 
 string CExporter::_getMaterialID(Material* mat)
@@ -246,4 +250,53 @@ D3DXMATRIX CExporter::_getRotationMatrix(const D3DXQUATERNION& quat) const
 	D3DXMATRIX mat;
 	D3DXMatrixRotationQuaternion(&mat, &quat);
 	return mat;
+}
+
+// Rebuilds m_frameCount / m_animations / m_boneAnimTMs from whatever motion
+// is currently attached to m_mesh / m_obj3D. Split out of the constructor so
+// a caller can swap m_mesh->m_motion for a different preloaded .ani (exactly
+// like CMainFrame::PlayMotion does) and re-run just this part, in order to
+// export several motions - each as its own animation clip - against the same
+// already-built geometry/material/skeleton data.
+//
+// This assumes the new motion's bones are indexed the same way as the
+// skeleton used to build m_bones (true for every .ani sharing one skeleton,
+// which is how the preloaded motion list in the UI is populated).
+void CExporter::_gatherAnimations()
+{
+	m_animations.clear();
+	m_boneAnimTMs.clear();
+
+	CMotion* motion = null;
+	if (m_mesh->m_motion)
+		motion = m_mesh->m_motion;
+	if (m_obj3D->m_motion)
+		motion = m_obj3D->m_motion;
+
+	m_frameCount = 0;
+	if (m_obj3D->m_frameCount > 0)
+		m_frameCount = m_obj3D->m_frameCount;
+	else if (motion && motion->m_frameCount > 0)
+		m_frameCount = motion->m_frameCount;
+
+	if (m_obj3D->m_frameCount > 0)
+	{
+		for (auto it = m_objects.begin(); it != m_objects.end(); it++)
+		{
+			if (it.value()->frames)
+				m_animations[it.key() % "-transform"] = it.value()->frames;
+		}
+	}
+
+	if (motion)
+	{
+		for (int i = 0; i < m_bones.size(); i++)
+		{
+			const string boneID = string(m_bones[i]->name).toLower().replace('.', '_').replace('-', '_').replace(' ', '_');
+			if (motion->m_frames[i].frames)
+				m_animations[boneID % "-transform"] = motion->m_frames[i].frames;
+			else
+				m_boneAnimTMs[m_bones[i]] = motion->m_frames[i].TM;
+		}
+	}
 }

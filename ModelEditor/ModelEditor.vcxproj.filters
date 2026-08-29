@@ -155,6 +155,9 @@
     <ClCompile Include="CollisionAuto.cpp">
       <Filter>MainFrame</Filter>
     </ClCompile>
+    <ClCompile Include="GLTFExporter.cpp">
+      <Filter>Export</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -216,6 +219,9 @@
     </ClInclude>
     <ClInclude Include="..\Common\ShortcutsMng.h">
       <Filter>Common\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GLTFExporter.h">
+      <Filter>Export</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
