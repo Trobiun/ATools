@@ -30,7 +30,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="QtSettings">
     <QtInstall>5.13.1_msvc2017_64</QtInstall>
     <QtModules>core;xml;gui;multimedia;widgets</QtModules>
-    <QtDeploy>true</QtDeploy>
+    <QtDeploy>false</QtDeploy>
     <QtDeployNoPatchQt>true</QtDeployNoPatchQt>
     <QtDeployNoPlugins>true</QtDeployNoPlugins>
     <QtDeployNoQuickImport>true</QtDeployNoQuickImport>
